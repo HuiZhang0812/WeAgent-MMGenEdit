@@ -1,4 +1,18 @@
-@import "tailwindcss";
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/22a5144ee8d83bca-s.p.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../fonts/7d4881bb7e1bf84d-s.p.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 :root {
   --ink: #10231a;
@@ -19,7 +33,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: "Geist", Arial, sans-serif;
   text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration: none; }
@@ -72,7 +86,7 @@ img { max-width: 100%; }
 .hero-inner { position: relative; }
 .eyebrow, .section-index, .card-kicker {
   color: var(--green);
-  font-family: var(--font-geist-mono), monospace;
+  font-family: "Geist Mono", monospace;
   font-size: 10px;
   font-weight: 760;
   letter-spacing: .16em;
@@ -88,7 +102,7 @@ img { max-width: 100%; }
 .chat-action { display: flex; align-items: center; gap: 11px; width: 220px; }
 .chat-avatar { display: grid; flex: 0 0 48px; place-items: center; width: 48px; height: 48px; overflow: hidden; border: 1px solid #dfe7e1; border-radius: 12px; background: white; box-shadow: 0 8px 22px rgba(31, 63, 44, .12); }
 .chat-avatar img { width: 29px; height: 29px; object-fit: contain; }
-.chat-avatar-code { background: linear-gradient(145deg, #f7fff9, #e7f6ec); color: var(--green-deep); font-family: var(--font-geist-mono), monospace; font-size: 13px; font-weight: 800; }
+.chat-avatar-code { background: linear-gradient(145deg, #f7fff9, #e7f6ec); color: var(--green-deep); font-family: "Geist Mono", monospace; font-size: 13px; font-weight: 800; }
 .chat-bubble { position: relative; display: grid; flex: 1 1; place-items: center; min-height: 50px; padding: 0 18px; border-radius: 13px; font-size: 14px; font-weight: 750; }
 .chat-bubble-green { background: #95ec69; color: #14221b; box-shadow: 0 10px 25px rgba(58, 174, 75, .16); }
 .chat-bubble-green::before { position: absolute; right: -8px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 9px solid #95ec69; content: ""; }
@@ -123,7 +137,7 @@ img { max-width: 100%; }
 .recipe-section { background: #fff; }
 .recipe-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 .recipe-card { min-height: 255px; padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(150deg, #fff, #f7fbf8); box-shadow: 0 14px 36px rgba(26, 67, 43, .055); }
-.recipe-card > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #e4f3e9; color: var(--green-deep); font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 800; }
+.recipe-card > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #e4f3e9; color: var(--green-deep); font-family: "Geist Mono", monospace; font-size: 11px; font-weight: 800; }
 .recipe-card h3 { margin: 35px 0 13px; font-size: 21px; line-height: 1.2; letter-spacing: -.035em; }
 .recipe-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
 
@@ -142,7 +156,7 @@ img { max-width: 100%; }
 .benchmark-section { border-top: 1px solid #dce3ef; border-bottom: 1px solid #dce3ef; background: #f6f8fc; }
 .benchmark-balance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 25px; }
 .benchmark-balance div { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 74px; padding: 14px; border: 1px solid #d9e1ef; border-radius: 14px; background: white; }
-.benchmark-balance span { margin-right: 4px; color: #758294; font-family: var(--font-geist-mono), monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .09em; }
+.benchmark-balance span { margin-right: 4px; color: #758294; font-family: "Geist Mono", monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .09em; }
 .benchmark-balance strong { color: #123b75; font-size: 13px; }
 .benchmark-balance i { color: #a6afba; font-style: normal; }
 
@@ -159,7 +173,7 @@ img { max-width: 100%; }
 .light-heading .section-heading-caption { color: #adc0b5; }
 .result-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
 .result-cards article { min-height: 200px; padding: 23px; border: 1px solid #31493d; border-radius: 17px; background: #162b20; }
-.result-cards span { color: #75d59e; font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.result-cards span { color: #75d59e; font-family: "Geist Mono", monospace; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
 .result-cards strong { display: block; margin: 25px 0 11px; color: white; font-size: 28px; letter-spacing: -.05em; }
 .result-cards p { margin: 0; color: #99ada2; font-size: 12px; line-height: 1.65; }
 .results-section .paper-figure { margin-top: 0; border-color: #2e4639; box-shadow: 0 24px 65px rgba(0, 0, 0, .23); }
@@ -170,7 +184,7 @@ img { max-width: 100%; }
 .gallery-tabs { display: flex; gap: 8px; }
 .gallery-tabs button { padding: 9px 13px; border: 1px solid #c8dacd; border-radius: 999px; background: white; color: #5a6f62; font-size: 11px; font-weight: 700; cursor: pointer; }
 .gallery-tabs button.active { border-color: var(--green); background: var(--green); color: white; }
-.gallery-toolbar > span { color: #71897b; font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .14em; }
+.gallery-toolbar > span { color: #71897b; font-family: "Geist Mono", monospace; font-size: 9px; letter-spacing: .14em; }
 .gallery-stage { position: relative; overflow: hidden; border-radius: 14px; background: white; }
 .gallery-stage figure { margin: 0; animation: case-fade .38s ease both; }
 .gallery-stage img { display: block; width: 100%; max-height: 1100px; object-fit: contain; }
