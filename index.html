@@ -13,7 +13,7 @@
     <meta name="twitter:description" content="A Full-Stack Recipe for Multimodal Agentic Image Generation and Editing">
     <meta name="twitter:image" content="static/images/og.png">
     <title>WeAgent-MMGenEdit | Multimodal Agentic Image Generation and Editing</title>
-    <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="static/images/wechat.png?v=3" type="image/png">
     <link rel="stylesheet" href="static/css/index.css">
     <script src="static/js/index.js" defer></script>
   </head>
@@ -26,11 +26,14 @@
         </a>
         <div class="navlinks">
           <a href="#abstract">Abstract</a>
+          <a href="#overview">Overview</a>
           <a href="#harness">Harness</a>
           <a href="#data">Data</a>
-          <a href="#training">Training</a>
+          <a href="#benchmark">Benchmark</a>
+          <a href="#agent-training">Agent PT</a>
+          <a href="#image-training">Image PT</a>
           <a href="#results">Results</a>
-          <a href="#showcase">Showcase</a>
+          <a href="#showcase">Cases</a>
         </div>
       </nav>
 
@@ -38,22 +41,25 @@
         <div class="hero-glow hero-glow-left"></div>
         <div class="hero-glow hero-glow-right"></div>
         <div class="container hero-inner">
-          <p class="eyebrow">Multimodal agentic generation &amp; editing</p>
           <h1>
             <span>WeAgent-MMGenEdit:</span>
             A Full-Stack Recipe for Multimodal Agentic Image Generation and Editing
           </h1>
 
           <div class="authors" aria-label="Authors">
-            <span>Hui Zhang</span>
-            <span>Zongkai Liu</span>
-            <span>Liqiang Niu‡</span>
-            <span>Juntao Liu</span>
-            <span>Han Li</span>
-            <span>Zhen Cao</span>
-            <span>Wenchao Chen</span>
-            <span>Chengduo Zhao</span>
-            <span>Fandong Meng†</span>
+            <div class="author-row">
+              <a href="https://huizhang0812.github.io/" target="_blank" rel="noopener noreferrer">Hui Zhang</a>
+              <span>Zongkai Liu</span>
+              <a href="https://scholar.google.com/citations?user=9Qk5MEAAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Liqiang Niu<sup>‡</sup></a>
+              <span>Juntao Liu</span>
+              <a href="https://scholar.google.com/citations?user=k-X6s24AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Han Li</a>
+              <span>Zhen Cao</span>
+            </div>
+            <div class="author-row">
+              <span>Wenchao Chen</span>
+              <span>Chengduo Zhao</span>
+              <a href="https://fandongmeng.github.io/" target="_blank" rel="noopener noreferrer">Fandong Meng<sup>†</sup></a>
+            </div>
           </div>
           <p class="affiliations">Weixin AI, Tencent</p>
           <p class="author-note">‡ Project Lead &nbsp;&nbsp; † Corresponding Author</p>
@@ -63,52 +69,61 @@
               <span class="chat-avatar chat-avatar-paper"><img src="static/images/arxiv-icon.ico" alt=""></span>
               <span class="chat-bubble chat-bubble-white" title="Paper link coming soon">Paper · Soon</span>
             </div>
+            <!--
             <div class="chat-action chat-action-right">
               <span class="chat-bubble chat-bubble-green" title="Code release coming soon">Code · Soon</span>
               <span class="chat-avatar chat-avatar-code" aria-hidden="true">&lt;/&gt;</span>
             </div>
-          </div>
-
-          <div class="hero-stats" aria-label="Project highlights">
-            <div><strong>23K</strong><span>SFT trajectories</span></div>
-            <div><strong>14.7K</strong><span>RL tasks</span></div>
-            <div><strong>300</strong><span>audited benchmark cases</span></div>
-            <div><strong>3%</strong><span>of a 1T agent's parameters</span></div>
+            -->
           </div>
 
           <figure class="paper-figure paper-figure-wide">
             <img src="static/images/chart_at_a_glance.webp" alt="At-a-glance bar charts comparing final image quality, agentic chain quality, and prompt quality">
-            <figcaption>WeAgent-MMGenEdit improves image generation and editing while a 30B-total / 3B-active policy approaches the performance of a trillion-parameter agent.</figcaption>
+            <figcaption>WeAgent-MMGenEdit consistently improves both the agentic process and final image quality across generation and editing. It outperforms similarly sized policies and approaches trillion-parameter agents, while image-side post-training further strengthens the generation performance.</figcaption>
           </figure>
+
+          <div class="hero-cases" aria-label="Generation and editing examples">
+            <figure class="hero-case">
+              <figcaption class="hero-case-heading">
+                <h2>Agentic Image Generation</h2>
+              </figcaption>
+              <img src="static/images/generation_cases.png" alt="Knowledge-intensive image generation examples covering basketball, football, tennis, and golf" loading="lazy">
+            </figure>
+            <figure class="hero-case">
+              <figcaption class="hero-case-heading">
+                <h2>Agentic Image Editing</h2>
+              </figcaption>
+              <img src="static/images/editing_cases.png" alt="Knowledge-intensive image editing examples covering a financial report, GPU infographic, films, and university rankings" loading="lazy">
+            </figure>
+          </div>
         </div>
       </header>
 
       <section class="section abstract-section" id="abstract">
         <div class="container content-column">
-          <p class="section-index">Overview</p>
           <h2 class="abstract-title">Abstract</h2>
           <p class="abstract-text">
             Image generation and editing models have advanced rapidly, yet remain unreliable when prompts require external world knowledge. Bounded and long-tail parametric knowledge prevents direct or reason-then-generate approaches from recovering the required facts and visual appearances. Existing agentic methods add retrieval, but remain constrained by insufficient visual verification, overloaded policy models, and weak integration of textual and visual evidence. We present <strong>WeAgent-MMGenEdit</strong>, a full-stack recipe spanning a multimodal harness, scalable data construction, a comprehensive benchmark, and post-training for both the agent policy and image backend. WeAgent-Harness manages persistent evidence and provides dedicated verification and integration tools that organize retrieved evidence into a dense carrier. Our pipeline yields 23K supervised trajectories and 14.7K RL tasks with three-layer verifiable checklists, while WeBench-MMGenEdit evaluates bilingual knowledge-intensive generation and multi-image editing. Together, these components enable a 30B-total / 3B-active policy to outperform similarly sized policy models and approach the performance of a trillion-parameter agent.
           </p>
-          <figure class="paper-figure">
+          <figure class="paper-figure teaser-figure">
             <img src="static/images/teaser.webp" alt="Comparison of closed-book, existing agentic, and WeAgent-MMGenEdit paradigms" loading="lazy">
-            <figcaption>Retrieval is only the beginning. WeAgent-MMGenEdit explicitly verifies visual evidence and integrates facts, identities, and layout before final image generation.</figcaption>
+            <figcaption><strong>Figure 3. Three paradigms for multimodal knowledge-intensive image generation and editing.</strong> <strong>(A)</strong> Closed-book generation relies solely on parametric knowledge and suffers from severe factual hallucinations. <strong>(B)</strong> Existing agentic systems retrieve external evidence but fail to effectively verify and integrate it because of insufficient visual inspection, an overloaded policy model, or weak entity–attribute–layout binding. <strong>(C)</strong> WeAgent-MMGenEdit verifies retrieved visual evidence and organizes multimodal evidence into a dense rendered carrier that provides both content and layout guidance for final generation, yielding the most accurate results.</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="section recipe-section" aria-labelledby="recipe-title">
+      <section class="section recipe-section" id="overview" aria-labelledby="recipe-title">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">The recipe</p>
             <h2 id="recipe-title">One system, end to end</h2>
-            <p class="section-heading-caption">Reliable knowledge-intensive generation is a systems problem. We jointly improve the runtime, supervision, policy, and image backend.</p>
+            <p class="section-heading-caption">Reliable knowledge-intensive generation is a full-stack problem. We jointly build the runtime, data, benchmark, agent policy, and image backend.</p>
           </div>
           <div class="recipe-grid">
             <article class="recipe-card"><span>01</span><h3>Multimodal harness</h3><p>Persistent evidence, explicit visual verification, and code-based integration keep long-horizon research grounded.</p></article>
             <article class="recipe-card"><span>02</span><h3>Verifiable data</h3><p>Bilingual multi-hop tasks are paired with aligned checklists for the agentic chain, model input, and final image.</p></article>
-            <article class="recipe-card"><span>03</span><h3>Agent post-training</h3><p>Supervised fine-tuning and checklist-grounded RL teach the policy to retrieve, verify, and compose evidence.</p></article>
-            <article class="recipe-card"><span>04</span><h3>Image post-training</h3><p>Multi-reference SFT and reward-driven diffusion RL improve reference conditioning and faithful rendering.</p></article>
+            <article class="recipe-card"><span>03</span><h3>Bilingual benchmark</h3><p>Three isolated evaluation levels measure the agentic chain, generation input, and final image.</p></article>
+            <article class="recipe-card"><span>04</span><h3>Agent post-training</h3><p>Supervised fine-tuning and checklist-grounded RL teach the policy to retrieve, verify, and compose evidence.</p></article>
+            <article class="recipe-card"><span>05</span><h3>Image post-training</h3><p>Multi-reference SFT and reward-driven diffusion RL improve reference conditioning and faithful rendering.</p></article>
           </div>
         </div>
       </section>
@@ -116,7 +131,6 @@
       <section class="section paper-section tint-section" id="harness">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">Runtime</p>
             <h2>WeAgent-Harness</h2>
             <p class="section-heading-caption">A persistent multimodal runtime for retrieval, verification, structured integration, and delivery.</p>
           </div>
@@ -135,7 +149,6 @@
       <section class="section paper-section" id="data">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">Data engine</p>
             <h2>WeDataset-MMGenEdit</h2>
             <p class="section-heading-caption">Bilingual multimodal knowledge becomes verifiable multi-hop tasks, expert trajectories, and targeted post-training data.</p>
           </div>
@@ -154,7 +167,6 @@
       <section class="section paper-section benchmark-section" id="benchmark">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">Evaluation</p>
             <h2>WeBench-MMGenEdit</h2>
             <p class="section-heading-caption">A human-audited bilingual benchmark that gives generation and editing equal weight.</p>
           </div>
@@ -162,28 +174,58 @@
             <img src="static/images/benchmark.webp" alt="Composition of the 300-case WeBench-MMGenEdit benchmark across languages, task types, domains, reasoning depth, and reference-image count" loading="lazy">
           </figure>
           <div class="benchmark-balance" aria-label="Benchmark balance">
-            <div><span>Task type</span><strong>150 Gen</strong><i>/</i><strong>150 Edit</strong></div>
-            <div><span>Language</span><strong>150 English</strong><i>/</i><strong>150 Chinese</strong></div>
-            <div><span>Evaluation</span><strong>Chain</strong><i>/</i><strong>Prompt</strong><i>/</i><strong>Image</strong></div>
+            <div><div class="benchmark-values"><strong>150 Gen</strong><i>/</i><strong>150 Edit</strong></div><span>task type</span></div>
+            <div><div class="benchmark-values"><strong>150 English</strong><i>/</i><strong>150 Chinese</strong></div><span>language</span></div>
+            <div><div class="benchmark-values"><strong>Chain</strong><i>/</i><strong>Prompt</strong><i>/</i><strong>Image</strong></div><span>evaluation levels</span></div>
           </div>
         </div>
       </section>
 
-      <section class="section training-section" id="training">
+      <section class="section training-section agent-training-section" id="agent-training">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">Optimization</p>
-            <h2>Two-sided post-training</h2>
-            <p class="section-heading-caption">The policy learns to research and compose better evidence; the image model learns to follow that evidence more faithfully.</p>
+            <h2>Agentic Post-Training</h2>
+            <p class="section-heading-caption">The policy first learns the complete harness protocol from expert trajectories, then improves evidence acquisition and integration with checklist-grounded reinforcement learning.</p>
           </div>
-          <div class="training-grid">
-            <article class="training-card">
-              <div class="training-card-copy"><span class="card-kicker">Agent side</span><h3>Checklist-grounded agentic RL</h3><p>Grouped rollouts, isolated process and prompt judges, failure-aware normalization, GSPO, and asynchronous policy refresh improve the full research trajectory.</p></div>
-              <img src="static/images/agentic_rl.webp" alt="Checklist-grounded agent reinforcement learning pipeline" loading="lazy">
+          <figure class="paper-figure training-figure">
+            <img src="static/images/agentic_rl.webp" alt="Checklist-grounded agent reinforcement learning pipeline" loading="lazy">
+            <figcaption><strong>Checklist-grounded agentic RL.</strong> Grouped trajectories are evaluated by isolated process and generation-input judges, then optimized asynchronously with failure-aware normalization and GSPO.</figcaption>
+          </figure>
+          <div class="stage-grid">
+            <article class="stage-card">
+              <span>Stage I</span>
+              <h3>Agentic Supervised Fine-Tuning</h3>
+              <p>Next-token supervision over policy-generated reasoning, tool calls, and final responses teaches reliable use of WeAgent-Harness from 23K expert trajectories.</p>
             </article>
-            <article class="training-card">
-              <div class="training-card-copy"><span class="card-kicker">Image side</span><h3>Multi-reference editing SFT + RL</h3><p>Heterogeneous reference conditioning is installed with SFT, then refined with a five-dimensional VLM reward and Diffusion-NFT optimization.</p></div>
-              <img src="static/images/edit_post_train.webp" alt="Multi-reference image editing supervised fine-tuning and reinforcement learning pipeline" loading="lazy">
+            <article class="stage-card">
+              <span>Stage II</span>
+              <h3>Checklist-Grounded Agentic RL</h3>
+              <p>Two isolated judges score the agentic process and final multimodal input. Invalid tool trajectories are excluded before group-relative GSPO updates.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section training-section image-training-section tint-section" id="image-training">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Image Editing Post-Training</h2>
+            <p class="section-heading-caption">The image backend learns to consume heterogeneous ordered references and faithfully render factual content, fine-grained text, identities, and preserved regions.</p>
+          </div>
+          <figure class="paper-figure training-figure">
+            <img src="static/images/edit_post_train.webp" alt="Multi-reference image editing supervised fine-tuning and reinforcement learning pipeline" loading="lazy">
+            <figcaption><strong>Two-stage image editing post-training.</strong> Multi-reference flow-matching SFT establishes stable conditioning before five-dimensional Diffusion-NFT reinforcement learning refines the output.</figcaption>
+          </figure>
+          <div class="stage-grid">
+            <article class="stage-card">
+              <span>Stage I</span>
+              <h3>Multi-Reference Editing SFT</h3>
+              <p>Independent resolution buckets and target-only flow-matching supervision support one to five references with different aspect ratios and semantic roles.</p>
+            </article>
+            <article class="stage-card">
+              <span>Stage II</span>
+              <h3>Multi-Objective Editing RL</h3>
+              <p>Diffusion-NFT optimizes instruction accuracy, text accuracy, preservation, aesthetics, and relative quality while remaining anchored to the SFT model.</p>
             </article>
           </div>
         </div>
@@ -192,9 +234,8 @@
       <section class="section results-section" id="results">
         <div class="container">
           <div class="section-heading light-heading">
-            <p class="section-index">Results</p>
-            <h2>Every layer gets stronger</h2>
-            <p class="section-heading-caption">Gains appear in the agentic process, the multimodal prompt sent to the backend, and the final rendered image.</p>
+            <h2>Quantitative Results</h2>
+            <p class="section-heading-caption">Browse the complete WeBench-MMGenEdit results, agentic chain and prompt scores, and evaluations on KnowGen and Mind-Bench.</p>
           </div>
           <div class="result-cards">
             <article><span>Final image · Gen</span><strong>21.2 → 47.4</strong><p>Qwen-Image/Edit backend, from direct generation to the full system.</p></article>
@@ -202,37 +243,45 @@
             <article><span>Agentic chain · Gen</span><strong>35.5 → 59.2</strong><p>The post-trained policy retrieves, verifies, and integrates evidence more reliably.</p></article>
             <article><span>Prompt quality · Edit</span><strong>21.8 → 50.9</strong><p>Verified visual knowledge survives into the final generation request.</p></article>
           </div>
-          <figure class="paper-figure paper-figure-wide">
-            <img src="static/images/chart_at_a_glance.webp" alt="Quantitative comparisons of WeAgent-MMGenEdit with direct, open-source agentic, and frontier policy baselines" loading="lazy">
-            <figcaption>At-a-glance results on WeBench-MMGenEdit. The green bars denote our agent and complete agent-plus-image stack.</figcaption>
-          </figure>
+          <div class="carousel-shell quantitative-carousel" data-carousel>
+            <div class="carousel-toolbar">
+              <div class="carousel-tabs" role="tablist" aria-label="Choose a quantitative result">
+                <button type="button" role="tab" aria-selected="true" class="active">WeBench-MMGenEdit</button>
+                <button type="button" role="tab" aria-selected="false">Agent &amp; Prompt</button>
+                <button type="button" role="tab" aria-selected="false">KnowGen</button>
+                <button type="button" role="tab" aria-selected="false">Mind-Bench</button>
+              </div>
+              <span class="carousel-counter">01 / 04</span>
+            </div>
+            <div class="carousel-stage">
+              <button type="button" class="carousel-arrow carousel-prev" aria-label="Previous quantitative result">←</button>
+              <figure class="carousel-slide quantitative-slide">
+                <img src="static/images/WeBench_MMGenEdit.png" alt="Table 2 quantitative results on image generation and editing" loading="lazy">
+              </figure>
+              <figure class="carousel-slide quantitative-slide" hidden>
+                <img src="static/images/agentic_prompt_score.png" alt="Table 5 comparison of agentic chain and prompt scores" loading="lazy">
+              </figure>
+              <figure class="carousel-slide quantitative-slide" hidden>
+                <img src="static/images/KnowGen_Benchmark.png" alt="Table 3 quantitative results on the KnowGen benchmark" loading="lazy">
+              </figure>
+              <figure class="carousel-slide quantitative-slide" hidden>
+                <img src="static/images/Mind_Bench.png" alt="Table 4 quantitative results on Mind-Bench" loading="lazy">
+              </figure>
+              <button type="button" class="carousel-arrow carousel-next" aria-label="Next quantitative result">→</button>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="section showcase-section" id="showcase">
         <div class="container">
           <div class="section-heading">
-            <p class="section-index">Qualitative study</p>
-            <h2>From evidence to pixels</h2>
+            <h2>Qualitative Results</h2>
             <p class="section-heading-description">Across knowledge-rich infographics and multi-reference edits, the complete system preserves more of the facts, identities, constraints, and layout requested by the user.</p>
           </div>
-          <div class="gallery-shell">
-            <div class="gallery-toolbar">
-              <div class="gallery-tabs" role="tablist" aria-label="Choose a qualitative result">
-                <button type="button" role="tab" aria-selected="true" class="active">System comparison</button>
-                <button type="button" role="tab" aria-selected="false">Application cases</button>
-              </div>
-              <span class="gallery-counter">01 / 02</span>
-            </div>
-            <div class="gallery-stage">
-              <button type="button" class="gallery-arrow gallery-prev" aria-label="Previous example">←</button>
-              <figure class="gallery-slide">
-                <img id="gallery-image" src="static/images/Visualization.webp" alt="Qualitative comparison across knowledge-intensive generation and multi-reference editing cases">
-                <figcaption id="gallery-caption">Our complete stack satisfies more knowledge and editing checklist items than direct and existing agentic baselines.</figcaption>
-              </figure>
-              <button type="button" class="gallery-arrow gallery-next" aria-label="Next example">→</button>
-            </div>
-          </div>
+          <figure class="paper-figure qualitative-figure">
+            <img src="static/images/Qualitative_results.png" alt="Figure 9 qualitative comparison on knowledge-intensive generation and editing" loading="lazy">
+          </figure>
         </div>
       </section>
 
